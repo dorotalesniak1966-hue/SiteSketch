@@ -11,7 +11,6 @@
 <style>
 body{
 margin:0;
-padding:0;
 }
 
 #map{
@@ -41,23 +40,22 @@ var drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
 
 var drawControl = new L.Control.Draw({
-draw:{
-polygon:true,
-polyline:true,
-rectangle:true,
-circle:false,
-marker:true
-},
-edit:{
-featureGroup:drawnItems
-}
+ draw:{
+  polygon:true,
+  polyline:true,
+  rectangle:true,
+  marker:true
+ },
+ edit:{
+  featureGroup:drawnItems
+ }
 });
 
 map.addControl(drawControl);
 
 map.on(L.Draw.Event.CREATED,function(e){
-var layer=e.layer;
-drawnItems.addLayer(layer);
+ var layer=e.layer;
+ drawnItems.addLayer(layer);
 });
 
 </script>
