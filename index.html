@@ -24,7 +24,42 @@
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
-</script>
+</<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+
+<script>
+var map = L.map('map').setView([51.1079, 17.0385], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+// WARSTWA NA RYSUNKI
+var drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
+// KONTROLKI RYSOWANIA
+var drawControl = new L.Control.Draw({
+    draw: {
+        polygon: true,
+        polyline: true,
+        rectangle: true,
+        circle: false,
+        marker: true
+    },
+    edit: {
+        featureGroup: drawnItems
+    }
+});
+
+map.addControl(drawControl);
+
+// NAJWAŻNIEJSZE — ZAPIS RYSUNKU
+map.on('draw:created', function (e) {
+    var layer = e.layer;
+    drawnItems.addLayer(layer);
+});
+</script>>
 
 </body>
 </html>
